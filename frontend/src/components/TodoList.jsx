@@ -31,7 +31,7 @@ function TodoList({ refresh }) {
   try {
     const res = await updateTodo(id, { title: editTitle });
 
-    // ✅ Update state directly
+  
     setTodos((prev) =>
       prev.map((todo) =>
         todo._id === id ? res.data : todo
@@ -56,7 +56,7 @@ function TodoList({ refresh }) {
           
           {editId === todo._id ? (
             <>
-              {/* WHITE INPUT BOX */}
+        
               <input
                 type="text"
                 value={editTitle}

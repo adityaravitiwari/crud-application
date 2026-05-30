@@ -21,8 +21,7 @@ exports.insertMany=async (req,res)=>{
         const insert=Todo.insertMany(req.body);
          res.status(201).json({
       message: "Todos inserted successfully",
-      count: insert.length,
-      data: insert
+     
     });
 
     }

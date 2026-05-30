@@ -1,3 +1,7 @@
+
+const dns = require("dns");
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,8 +12,8 @@ connectDB();
 
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT
 
 app.listen(PORT, () => {
-  console.log("Server started on port 5000");
+  console.log(`Server started on port ${PORT}`);
 });
