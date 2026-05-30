@@ -1,16 +1,171 @@
-# React + Vite
+# Poetry Management Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+This project is a full-stack Poetry Management Application built using React.js, Node.js, Express.js, MongoDB Atlas, Mongoose, and Axios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application allows users to manage poetry records by performing CRUD operations. Each poetry record contains:
 
-## React Compiler
+* Title
+* Poetry Content
+* Poet Name
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Users can add, view, search, update, and delete poetry records through a simple user interface.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Database Schema
+
+The application uses the following MongoDB schema:
+
+```javascript
+const todoSchema = new mongoose.Schema(
+{
+    title:{
+        type:String,
+        required:true,
+    },
+
+    poetry:{
+        type:String,
+        required:true,
+    },
+
+    poet:{
+        type:String,
+        required:true,
+    }
+
+},
+{ timestamps:true }
+);
+```
+
+### Field Description
+
+| Field     | Description          |
+| --------- | -------------------- |
+| title     | Title of the poetry  |
+| poetry    | Poetry content       |
+| poet      | Name of the poet     |
+| createdAt | Record creation time |
+| updatedAt | Record update time   |
+
+---
+
+# Features
+
+* Add a new poetry record
+* View all poetry records
+* Search poetry by ID
+* Update poetry details
+* Delete poetry records
+* Dynamic UI updates after CRUD operations
+
+---
+
+# API Endpoints
+
+| Method | Endpoint       | Description                |
+| ------ | -------------- | -------------------------- |
+| POST   | /api/tasks     | Create a new poetry record |
+| GET    | /api/tasks     | Get all poetry records     |
+| GET    | /api/tasks/:id | Get poetry by ID           |
+| PUT    | /api/tasks/:id | Update poetry              |
+| DELETE | /api/tasks/:id | Delete poetry              |
+
+---
+
+# Setup
+
+## Backend
+
+```bash
+npm install
+npm start
+```
+
+Runs on:
+
+```txt
+http://localhost:5000
+```
+
+## Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+Runs on:
+
+```txt
+http://localhost:5173
+```
+
+---
+
+# Environment Variables
+
+Create a `.env` file inside the backend folder:
+
+```env
+MONGO_URL=your_mongodb_connection_string
+PORT=5000
+```
+
+---
+
+# Technologies Used
+
+* React.js
+* Axios
+* Node.js
+* Express.js
+* MongoDB Atlas
+* Mongoose
+
+---
+
+# Challenges Faced
+
+While implementing the project, I faced a MongoDB Atlas connection issue. Although the connection string was correct, Node.js was using local DNS, which caused errors such as:
+
+```txt
+querySrv ECONNREFUSED
+querySrv ETIMEOUT
+```
+
+After debugging the issue, I configured Google DNS in the server:
+
+```javascript
+const dns = require("dns");
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+```
+
+After this change, MongoDB Atlas connected successfully.
+
+Another challenge was integrating the React frontend with backend APIs and updating the UI dynamically after Create, Update, Delete, and Search operations.
+
+---
+
+
+
+# Deployment
+
+Frontend (Netlify):
+
+```txt
+(https://poetrrry.netlify.app/)
+```
+
+
+
+
+---
+
+# Conclusion
+
+This project helped me understand CRUD operations, REST APIs, MongoDB Atlas integration, React frontend integration, and communication between frontend and backend using Axios. It also helped me learn how to debug real-world issues such as MongoDB DNS connection problems.
